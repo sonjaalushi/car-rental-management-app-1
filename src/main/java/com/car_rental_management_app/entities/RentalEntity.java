@@ -1,6 +1,5 @@
 package com.car_rental_management_app.entities;
 
-import com.car_rental_management_app.enums.Role;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,26 +19,25 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
-public class UserEntity {
-
+@Table(name = "rental")
+public class RentalEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "rental_id")
+    Long id;
+
     @Column(name = "name")
     private String name;
-    @Column(name = "lastName")
-    private String lastName;
+
     @Column(name = "email")
     private String email;
-    @Column(name = "password")
-    private String password;
-    @Column(name = "age")
-    private Integer age;
-    @Column(name = "role")
-    private Role role;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userEntity")
-    private List<ReservationEntity> reservationEntities;
+    @Column(name = "owner")
+    private String owner;
+
+    // create the relationship mapping between rental and branch entities
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "rentalEntity")
+    private List<BranchEntity> branchEntities;
+
 }
